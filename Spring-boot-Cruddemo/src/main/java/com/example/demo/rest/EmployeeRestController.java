@@ -9,23 +9,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dao.EmployeeDao;
 import com.example.demo.entity.Employee;
+import com.example.demo.service.EmployeeService;
 
 @RestController
 @RequestMapping("/api")
 public class EmployeeRestController {
 
-	private EmployeeDao employeeDAO;
+	private EmployeeService employeeService;
 	
 	// inject employee DAO(use constructor injection)
 	@Autowired
-	public EmployeeRestController(EmployeeDao theEmployeeDao) {
-		employeeDAO = theEmployeeDao;
+	public EmployeeRestController(EmployeeService theEmployeeService) {
+		employeeService = theEmployeeService;
 	}
 	
 	//expose "/employees" and return list of employee
 	@GetMapping("/employees")
 	public List<Employee>findAll(){
-		return employeeDAO.findAll();
+		return employeeService.findAll();
 	}
 	
 }
